@@ -1,16 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI; 
 
 public class Scorer : MonoBehaviour
 {
-    int hits = 0;
-    private void OnCollisionEnter(Collision other) 
+    private int hits; 
+    public Text ScoreText;
+
+    void Start() 
     {
+        hits = 0;
+        SetScoreText();    
+    }
+    void OnCollisionEnter(Collision other) 
+    {
+
         if(other.gameObject.tag != "Hit")
         {
-            hits++;
-            Debug.Log("Number of times you've bumoed into something :"+ hits);
+             hits++;
+             SetScoreText();
+             Debug.Log("Number of times you've bumped into something :"+ hits);
         }
+    }
+
+    void SetScoreText()
+    {
+        ScoreText.text = "HitCounts = " + hits.ToString();
     }
 }
